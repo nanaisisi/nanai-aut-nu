@@ -67,9 +67,9 @@ if not ((which cargo) | is-empty) {
 
     # nu の更新実行
     if ($nu_update_run_flag == true) {
-        print "Updating nu"
-        cargo install nu --features "full mcp"
-    } else {
+        print "You need is update nu"
+        exit
+            } else {
         print "No updates available for nu"
     }
 
