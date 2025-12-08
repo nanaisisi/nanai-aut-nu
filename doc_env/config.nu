@@ -4,12 +4,14 @@
 #hx $nu.config-path
 
 $env.config.buffer_editor = "hx"
-$env.config.edit_mode = 'vi'
 $env.config = { rm: {
         always_trash: true # always act as if -t was given. Can be overridden with -p
         }
- edit_mode = vi
 }
+$env.config.edit_mode = 'vi'
 mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
-#lol
+
+def chksum [file1, file2] {
+        (($file1 | hash md5) == ($file2 | hash md5))
+}
