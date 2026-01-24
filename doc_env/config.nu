@@ -1,6 +1,4 @@
 $env.config.buffer_editor = "hx"
-mkdir ($nu.data-dir | path join "vendor/autoload")
-
 $env.config.edit_mode = 'vi'
 $env.config.rm.always_trash = true
 $env.config.history = {
@@ -23,4 +21,5 @@ $env.config.keybindings ++= [
     ]
   }
  ]
+mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
