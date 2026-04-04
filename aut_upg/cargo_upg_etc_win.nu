@@ -29,7 +29,7 @@ if not ((which cargo) | is-empty) {
                 $erg_update_run_flag = true
             }
         # 優先順位4: nu（フラッグ管理、後で特別オプション付きインストール）
-        } else if ($line_cargo | str contains "nu") {
+        } else if ($line_cargo | str contains "nu ") {
             if ($line_cargo | str contains "Yes") {
                 print "Yes update needed for nu"
                 # nu の更新処理をここに追加する場合は、同様にフラッグを設定するか、直接更新コマンドを実行する
