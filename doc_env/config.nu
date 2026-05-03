@@ -1,3 +1,4 @@
+source "~/.cargo/env.nu"
 $env.config.buffer_editor = "hx"
 $env.config.edit_mode = 'vi'
 $env.config.rm.always_trash = true
