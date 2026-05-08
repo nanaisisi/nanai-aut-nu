@@ -23,7 +23,7 @@ if ((which wsl) | is-empty) {
     print "wsl update"
     wsl --update --pre-release
 }
-source not_termux.nu
+source ../common/not_termux.nu
 if ((which uv) | is-empty) {
     print "uv is not installed"
 } else {
