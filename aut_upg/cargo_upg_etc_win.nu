@@ -12,24 +12,28 @@ if not ((which cargo) | is-empty) {
     for $line_cargo in $lines_cargo {
         # 優先順位1: cargo-binstall（即座に更新）
         if ($line_cargo | str contains "cargo-binstall") {
+            print "Found cargo-binstall in cargo list"
             if ($line_cargo | str contains "Yes") {
                 print "Yes update needed for cargo-binstall"
                 $cargo_binstall_update_run_flag = true
             }
         # 優先順位2: cargo-update（フラッグ管理、後でbinstall更新）
         } else if ($line_cargo | str contains "cargo-update") {
+            print "Found cargo-update in cargo list"
             if ($line_cargo | str contains "Yes") {
                 print "Yes update needed for cargo-update"
                 $cargo_update_app_update_run_flag = true
             }
         # 優先順位3: erg（フラッグ管理、後で特別オプション付きインストール）
         } else if ($line_cargo | str contains "erg") {
+            print "Found erg in cargo list"
             if ($line_cargo | str contains "Yes") {
                 print "Yes update needed for erg"
                 $erg_update_run_flag = true
             }
         # 優先順位4: nu（フラッグ管理、後で特別オプション付きインストール）
-        } else if ($line_cargo | str contains "nu ") {
+        } else if ($line_cargo | str contains "nu v") {
+            print "Found nu in cargo list"
             if ($line_cargo | str contains "Yes") {
                 print "Yes update needed for nu"
                 # nu の更新処理をここに追加する場合は、同様にフラッグを設定するか、直接更新コマンドを実行する
