@@ -18,31 +18,42 @@ if not ((which cargo) | is-empty) {
                 $cargo_binstall_update_run_flag = true
             }
         # 優先順位2: cargo-update（フラッグ管理、後でbinstall更新）
-        } else if ($line_cargo | str contains "cargo-update") {
-            print "Found cargo-update in cargo list"
-            if ($line_cargo | str contains "Yes") {
-                print "Yes update needed for cargo-update"
-                $cargo_update_app_update_run_flag = true
+        } else if ($cargo_update_app_update_run_flag == false) {
+            if ($line_cargo | str contains "cargo-update") {
+                print "Found cargo-update in cargo list"
+                if ($line_cargo | str contains "Yes") {
+                    print "Yes update needed for cargo-update"
+                    $cargo_update_app_update_run_flag = true
             }
+        }
         # 優先順位3: erg（フラッグ管理、後で特別オプション付きインストール）
-        } else if ($line_cargo | str contains "erg") {
+        # 既にtrueの場合は文字列判定をスキップする.
+        } else if ($erg_update_run_flag == false) {
+        if ($line_cargo | str contains "erg") {
             print "Found erg in cargo list"
             if ($line_cargo | str contains "Yes") {
                 print "Yes update needed for erg"
                 $erg_update_run_flag = true
             }
         # 優先順位4: nu（フラッグ管理、後で特別オプション付きインストール）
-        } else if ($line_cargo | str contains "nu v") {
+        # nu pluginのnu-から始まるものとnu_から始まるものを除外する.
+        # 既にtrueの場合は文字列判定をスキップする.
+        } else if($nu_update_run_flag == false) {(($line_cargo | str contains "nu") and not ($line_cargo | str contains "nu-") and not ($line_cargo | str contains "nu_")) {
             print "Found nu in cargo list"
             if ($line_cargo | str contains "Yes") {
                 print "Yes update needed for nu"
                 # nu の更新処理をここに追加する場合は、同様にフラッグを設定するか、直接更新コマンドを実行する
                 $nu_update_run_flag = true
             }
+            }
         # 優先順位5: 一般的なcargo apps（一括更新フラッグ）
-        } else if ($line_cargo | str contains "Yes") {
-            $cargo_all_update_run_flag = true
+        } else if ($cargo_all_update_run_flag == false) {
+            if ($line_cargo | str contains "Yes") {
+                print "Yes update needed for cargo all apps"
+                $cargo_all_update_run_flag = true
+            }
         }
+    }
     }
 
     # 優先順位1: cargo-binstall の更新実行
@@ -72,8 +83,8 @@ if not ((which cargo) | is-empty) {
     # nu の更新実行
     if ($nu_update_run_flag == true) {
         print "Updating nu"
-        cargo install nu --features "full mcp"
-            } else {
+        cargo install nu --features "full"
+    } else {
         print "No updates available for nu"
     }
 
@@ -85,3 +96,4 @@ if not ((which cargo) | is-empty) {
         print "No updates available for cargo all apps"
     }
 }
+
