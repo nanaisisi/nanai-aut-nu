@@ -16,7 +16,7 @@ if not ((which uv) | is-empty) {
     let uv_lines = $uv_output | lines # uv実行によるの行を解析
     for uv_line in $uv_lines {
         if ($uv_line | str contains "Error") {
-        powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+            powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
         }
     }
 } else {

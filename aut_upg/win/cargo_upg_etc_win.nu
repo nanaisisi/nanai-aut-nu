@@ -38,7 +38,8 @@ if not ((which cargo) | is-empty) {
         # 優先順位4: nu（フラッグ管理、後で特別オプション付きインストール）
         # nu pluginのnu-から始まるものとnu_から始まるものを除外する.
         # 既にtrueの場合は文字列判定をスキップする.
-        } else if($nu_update_run_flag == false) {(($line_cargo | str contains "nu") and not ($line_cargo | str contains "nu-") and not ($line_cargo | str contains "nu_")) {
+        } else if ($nu_update_run_flag == false) {
+        if (($line_cargo | str contains "nu") and not ($line_cargo | str contains "nu-") and not ($line_cargo | str contains "nu_")) {
             print "Found nu in cargo list"
             if ($line_cargo | str contains "Yes") {
                 print "Yes update needed for nu"

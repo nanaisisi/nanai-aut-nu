@@ -1,5 +1,3 @@
-
-
 #windows store上のソフトウェアのインストール
 #最優先パッケージマネージャ
 #ついでwinget
@@ -36,6 +34,7 @@ winget install 9PB0TRCNRHFX -s msstore
 winget install 9MZPRTH5C0TB -s msstore
 #OpenCL™、OpenGL®、および Vulkan® 互換機能パック
 winget install 9NQPSL29BFFF -s msstore
+
 #ウクライナ語、非認識
 #winget install 9PP8PMZRSGHR8 -s msstore
 

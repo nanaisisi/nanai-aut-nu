@@ -16,24 +16,32 @@ match (sys host | get name) {
     "Windows" => (
         # Windows用の処理
         source ./aut_env/win_env.nu
-    ),
+    )
     "Ubuntu" => (
         # Ubuntu用の処理
         #source ./aut_env/ubuntu_env.nu
         print "Ubuntu用のインストール処理は未実装です。"
-    ),
+    )
     "Debian" => (
         # Linux用の処理
         #source ./aut_env/debians_env.nu
         print "Debian用のインストール処理は未実装です。"
-    ),
+    )
     "Kali" => (
         # Kali Linux用の処理
         # ただし、Debian用コードを流用
         #source ./aut_env/debians_env.nu
         print "Kali Linux用のインストール処理は未実装です。"
-    ),
+    )
     _ => {
+        # Windows用の処理
+        # Ubuntu用の処理
+        #source ./aut_env/ubuntu_env.nu
+        # Linux用の処理
+        #source ./aut_env/debians_env.nu
+        # Kali Linux用の処理
+        # ただし、Debian用コードを流用
+        #source ./aut_env/debians_env.nu
         if $nu.os-info.name in ["Android", "android"] {
             # Android用の処理
             # Termuxは、

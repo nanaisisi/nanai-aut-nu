@@ -31,8 +31,8 @@ if ((which uv) | is-empty) {
     uv self update
 }
 
-    print "git update"
-    git update-git-for-windows
+print "git update"
+git update-git-for-windows
 
 if ((which winapp) | is-empty) {
     print "winapp is not installed"
