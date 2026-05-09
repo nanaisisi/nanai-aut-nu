@@ -3,10 +3,29 @@
 #https://github.com/ScoopInstaller/Install/blob/master/install.ps1
 
 #Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-# Invoke-RestMethod -Uri https://github.com/nanaisisi/aut_nu/tree/main/env_aut/install.ps1 | Invoke-Expression
+# Invoke-RestMethod -Uri https://github.com/nanaisisi/nanai-aut-nu/tree/main/windows_env.ps1 | Invoke-Expression
 
-# Issue Tracker: https://github.com/nanaisisi/aut_nu/issues
-function Install-aut_nu {
+# Issue Tracker: https://github.com/nanaisisi/nanai-aut-nu/issues
+
+# Prepare variables
+$IS_EXECUTED_FROM_IEX = ($null -eq $MyInvocation.MyCommand.Path)
+
+# Abort when the language mode is restricted
+Test-LanguageMode
+
+# nanai-aut-nu root directory
+$nanai_aut_nu_DIR = $nanai_aut_nuDir, $env:nanai_aut_nu, "$env:USERPROFILE\nanai-aut-nu" | Where-Object { -not [String]::IsNullOrEmpty($_) } | Select-Object -First 1
+## nanai-aut-nu cache directory
+$nanai_aut_nu_CACHE_DIR = $nanai_aut_nuCacheDir, $env:nanai_aut_nu_CACHE, "$nanai-aut-nu_DIR\cache" | Where-Object { -not [String]::IsNullOrEmpty($_) } | Select-Object -First 1
+# nanai-aut-nu config file location
+$nanai_aut_nu_CONFIG_HOME = $env:XDG_CONFIG_HOME, "$env:USERPROFILE\.config" | Select-Object -First 1
+$nanai_aut_nu_CONFIG_FILE = "$nanai-aut-nu_CONFIG_HOME\nanai-aut-nu\config.json"
+
+
+$nanai_aut_nu_PACKAGE_GIT_REPO = 'https://github.com/nanaisisi/nanai-aut-nu.git'
+
+
+function Install-nanai_aut-nu {
     Write-InstallInfo 'Initializing...'
     # Validate install parameters
     Test-ValidateParameter
@@ -15,7 +34,7 @@ function Install-aut_nu {
     # Enable TLS 1.2
     Optimize-SecurityProtocol
 
-    # Download aut_nu from GitHub
+    # Download nanai_aut-nu from GitHub
     Write-InstallInfo 'Downloading...'
     $downloader = Get-Downloader
 
@@ -28,8 +47,8 @@ function Install-aut_nu {
                 $Env:HTTP_PROXY = $downloader.Proxy.Address
                 $Env:HTTPS_PROXY = $downloader.Proxy.Address
             }
-            Write-Verbose "Cloning $aut_nu_PACKAGE_GIT_REPO to $aut_nu_APP_DIR"
-            git clone -q $aut_nu_PACKAGE_GIT_REPO $aut_nu_APP_DIR
+            Write-Verbose "Cloning $nanai_aut_nu_PACKAGE_GIT_REPO to $nanai_aut_nu_APP_DIR"
+            git clone -q $nanai_aut_nu_PACKAGE_GIT_REPO $nanai_aut_nu_APP_DIR
             if (-Not $?) {
                 throw 'Cloning failed. Falling back to downloading files.'
             }
@@ -42,29 +61,12 @@ function Install-aut_nu {
     }
 
 
-    # Setup initial configuration of aut_nu
+    # Setup initial configuration of nanai_aut-nu
     Add-DefaultConfig
 
-    Write-InstallInfo 'aut_nu was installed successfully!' -ForegroundColor DarkGreen
-    Write-InstallInfo "Type 'aut_nu help' for instructions."
+    Write-InstallInfo 'nanai_aut-nu was installed successfully!' -ForegroundColor DarkGreen
+    Write-InstallInfo "Type 'nanai_aut-nu help' for instructions."
 }
-
-# Prepare variables
-$IS_EXECUTED_FROM_IEX = ($null -eq $MyInvocation.MyCommand.Path)
-
-# Abort when the language mode is restricted
-Test-LanguageMode
-
-# aut_nu root directory
-$aut_nu_DIR = $aut_nuDir, $env:aut_nu, "$env:USERPROFILE\aut_nu" | Where-Object { -not [String]::IsNullOrEmpty($_) } | Select-Object -First 1
-## aut_nu cache directory
-$aut_nu_CACHE_DIR = $aut_nuCacheDir, $env:aut_nu_CACHE, "$aut_nu_DIR\cache" | Where-Object { -not [String]::IsNullOrEmpty($_) } | Select-Object -First 1
-# aut_nu config file location
-$aut_nu_CONFIG_HOME = $env:XDG_CONFIG_HOME, "$env:USERPROFILE\.config" | Select-Object -First 1
-$aut_nu_CONFIG_FILE = "$aut_nu_CONFIG_HOME\aut_nu\config.json"
-
-
-$aut_nu_PACKAGE_GIT_REPO = 'https://github.com/nanaisisi/aut_nu.git'
 
 # Quit if anything goes wrong
 $oldErrorActionPreference = $ErrorActionPreference
@@ -73,7 +75,7 @@ $ErrorActionPreference = 'Stop'
 # Logging debug info
 Write-DebugInfo $PSBoundParameters
 
-# Nushellの自動インストール（scoop経由）
+# Nushellの自動インストール（cargo経由）
 function Install-Nushell {
     if (!(Get-Command 'nu' -ErrorAction SilentlyContinue)) {
         Write-Output 'Nushellが見つかりません。自動インストールを開始します。'
