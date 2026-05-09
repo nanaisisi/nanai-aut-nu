@@ -1,7 +1,7 @@
 if ((which winget) | is-empty) {
     print "winget is not installed"
 } else {
-    print "winget listup"
+    print "winget list"
     print "use UniGetUI"
     winget upgrade
 }
@@ -23,7 +23,7 @@ if ((which wsl) | is-empty) {
     print "wsl update"
     wsl --update --pre-release
 }
-source ../common/not_termux.nu
+source ../common/not_termux_upg.nu
 if ((which uv) | is-empty) {
     print "uv is not installed"
 } else {

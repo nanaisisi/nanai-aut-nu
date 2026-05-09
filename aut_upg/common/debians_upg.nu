@@ -5,5 +5,5 @@ if not ((which apt) | is-empty) {
     sudo apt dist-upgrade -y
 }
 
-source ./not_termux.nu
+source ./not_termux_upg.nu
 source ./posix_upg.nu
