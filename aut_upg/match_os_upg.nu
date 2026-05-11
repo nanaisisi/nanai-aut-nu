@@ -6,24 +6,24 @@ git merge
 match (sys host | get name) {
     "Windows" => (
         # Windows用の処理
-        source win/win_upg.nu
+        source ./win/win_upg.nu
     )
     "Ubuntu" => (
         # Ubuntu用の処理
-        source ubuntu/ubuntu_upg.nu
+        source ./ubuntu/ubuntu_upg.nu
     )
     "Debian" => (
         if ((sys host | get hostname) == "raspberrypi") {
             # Raspberry Pi OS用の処理
-            source rpi/rpi_upg.nu
+            source ./rpi/rpi_upg.nu
         } else {
             # Linux用の処理
-            source common/debians_upg.nu
+            source ./common/debians_upg.nu
         }
     )
     "Kali" => (
         # Kali Linux用の処理
-        source common/debians_upg.nu
+        source ./common/debians_upg.nu
     )
     _ => {
         # Windows用の処理
@@ -37,7 +37,7 @@ match (sys host | get name) {
             # host名が端末名かつ、
             # nuのOS情報がAndroidなので、
             # Termuxとして処理する
-            source termux/termux_upg.nu
+            source ./termux/termux_upg.nu
         } else {
             print ("未対応のOS:" + (sys host | get name))
         }
