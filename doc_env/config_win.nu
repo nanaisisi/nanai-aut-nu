@@ -21,6 +21,9 @@ $env.config.keybindings ++= [
        { send: HistoryHintComplete }
     ]
   }
- ]
+]
+def chksum [file1, file2] {
+        (($file1 | hash md5) == ($file2 | hash md5))
+}
 mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
