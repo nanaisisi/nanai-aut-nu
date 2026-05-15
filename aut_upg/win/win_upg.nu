@@ -70,8 +70,8 @@ if not ((which uv) | is-empty) {
 }
 
 if not ((which pip) | is-empty) {
-    uv pip install --upgrade pip
-    uv pip install --upgrade pip-review
+    uv pip install --system --upgrade pip
+    uv pip install --system --upgrade pip-review
     pip-review --auto
 } else {
     print "pip is not installed"
