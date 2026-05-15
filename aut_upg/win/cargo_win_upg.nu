@@ -60,7 +60,7 @@ if not ((which cargo) | is-empty) {
     # 優先順位1: cargo-binstall の更新実行
     if ($cargo_binstall_update_run_flag == true) {
         print "Updating cargo-binstall"
-        cargo binstall --force cargo-binstall
+        cargo binstall cargo-binstall
     } else {
         print "No updates available for cargo-binstall"
     }
@@ -68,7 +68,7 @@ if not ((which cargo) | is-empty) {
     # 優先順位2: cargo-update の更新実行
     if ($cargo_update_app_update_run_flag == true) {
         print "Updating cargo-update"
-        cargo binstall --force cargo-update
+        cargo binstall cargo-update
     } else {
         print "No updates available for cargo-update"
     }
