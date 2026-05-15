@@ -3,3 +3,4 @@
 
 pkg upgrade
 source ../common/posix_upg.nu
+source ../common/cargo_upg_etc.nu

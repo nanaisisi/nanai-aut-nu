@@ -19,5 +19,3 @@ if not ((which uv) | is-empty) {
 } else {
     print "deno is not installed"
 }
-
-source cargo_upg_etc.nu
