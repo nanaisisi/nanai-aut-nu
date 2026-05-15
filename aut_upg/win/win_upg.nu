@@ -1,3 +1,7 @@
+# Gitはあるだろう
+print "git update"
+git update-git-for-windows
+
 if ((which winget) | is-empty) {
     print "winget is not installed"
 } else {
@@ -24,17 +28,6 @@ if ((which wsl) | is-empty) {
     wsl --update --pre-release
 }
 
-if ((which uv) | is-empty) {
-    print "uv is not installed"
-} else {
-    print "uv update"
-    uv self update
-}
-
-# Gitはあるだろう
-print "git update"
-git update-git-for-windows
-
 if ((which winapp) | is-empty) {
     print "winapp is not installed"
 } else {
@@ -49,32 +42,5 @@ if ((which copilot) | is-empty) {
     copilot update
 }
 
-if not ((which rustup) | is-empty) {
-    rustup self update
-    rustup update
-} else {
-    print "rustup is not installed"
-}
-
-if not ((which deno) | is-empty) {
-    deno upgrade
-} else {
-    print "deno is not installed"
-}
-
-if not ((which uv) | is-empty) {
-    uv self update
-    uv tool upgrade --all
-} else {
-    print "uv is not installed"
-}
-
-if not ((which pip) | is-empty) {
-    uv pip install --system --upgrade pip
-    uv pip install --system --upgrade pip-review
-    pip-review --auto
-} else {
-    print "pip is not installed"
-}
-
+source ../common/not_termux_upg.nu
 source cargo_win_upg.nu

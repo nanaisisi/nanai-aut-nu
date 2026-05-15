@@ -3,3 +3,5 @@
 
 apt update -y
 apt dist-upgrade -y
+
+source ../common/not_termux_posix_upg.nu
