@@ -27,3 +27,6 @@ def chksum [file1, file2] {
 }
 mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+# Generate the integration script
+mkdir ($nu.default-config-dir | path join "autoload")
+fzf --nushell | save -f ($nu.default-config-dir | path join "autoload" "_fzf_integration.nu")
