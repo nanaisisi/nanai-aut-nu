@@ -4,34 +4,30 @@ git merge
 # 実行環境ごとに条件分岐して処理を分ける
 
 match (sys host | get name) {
-    "Windows" => (
+    (str contains "Windows") => (
         # Windows用の処理
         source ./win/win_upg.nu
     )
-    "Ubuntu" => (
+    (str contains "Ubuntu") => (
         # Ubuntu用の処理
         source ./ubuntu/ubuntu_upg.nu
     )
-    "Debian" => (
-        if ((sys host | get hostname) == "raspberrypi") {
+    (str contains "Debian") => (
+        if ((sys host | get hostname)  | str contains "raspberrypi") {
             # Raspberry Pi OS用の処理
             source ./rpi/rpi_upg.nu
         } else {
             # Linux用の処理
+            # contain Android official terminal debian OS
             source ./common/debians_upg.nu
         }
     )
-    "Kali" => (
+    (str contains "Kali") => (
         # Kali Linux用の処理
         source ./common/debians_upg.nu
     )
     _ => {
-        # Windows用の処理
-        # Ubuntu用の処理
-        # Raspberry Pi OS用の処理
-        # Linux用の処理
-        # Kali Linux用の処理
-        if $nu.os-info.name in ["Android", "android"] {
+        if ($nu.os-info.name | str contains ["Android", "android"]) {
             # Androidのtermux用の処理
             # Termuxは、
             # host名が端末名かつ、
