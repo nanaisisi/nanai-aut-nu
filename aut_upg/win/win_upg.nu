@@ -43,4 +43,4 @@ if ((which copilot) | is-empty) {
 }
 
 source ../common/not_termux_upg.nu
-source cargo_win_upg.nu
+source ../common/cargo_upg_etc.nu
