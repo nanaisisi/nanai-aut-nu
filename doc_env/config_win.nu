@@ -1,6 +1,6 @@
 
 $env.config.buffer_editor = "hx"
-$env.config.edit_mode = 'vi'
+$env.config.edit_mode = 'helix'
 $env.config.rm.always_trash = true
 $env.config.history = {
   file_format: sqlite
