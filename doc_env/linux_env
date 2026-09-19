@@ -27,11 +27,9 @@ export PATH=$PATH:$HOME/snap/bin
 export PATH=$PATH:$HOME/.elan/bin
 export PATH=$PATH:$HOME/.rye/shims
 export PATH=$PATH:$HOME/.cargo/bin
-export PATH=$PATH:$HOME/.fzf/bin
 
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
-eval "$(fzf --bash)"
 eval "$(mcfly init bash)"
 eval "$(sheldon source)"
 
@@ -39,7 +37,7 @@ eval "$(sheldon source)"
 export LANG=ja_JP.UTF-8
 
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 
 eval "$(starship init bash)"
 
