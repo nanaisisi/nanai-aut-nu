@@ -28,7 +28,6 @@ linker = "rust-lld.exe"
 rustflags = [
     #nightly
   "-Zshare-generics=y",
-  "-Zhint-mostly-unused",
 ]
 
 #linux
@@ -39,7 +38,6 @@ linker = "clang"
 rustflags = [
     #nightly
   "-Zshare-generics=y",
-  "-Zhint-mostly-unused",
   "-C", "link-arg=-fuse-ld=mold"
 ]
 
@@ -52,7 +50,6 @@ linker = "clang"
 rustflags = [
     #nightly
   "-Zshare-generics=y",
-  "-Zhint-mostly-unused",
   "-C", "link-arg=-fuse-ld=mold"
 ]
 
