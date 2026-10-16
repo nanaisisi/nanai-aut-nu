@@ -28,6 +28,7 @@ linker = "rust-lld.exe"
 rustflags = [
     #nightly
   "-Zshare-generics=y",
+  "-Zhint-mostly-unused",
 ]
 
 #linux
