@@ -39,6 +39,7 @@ linker = "clang"
 rustflags = [
     #nightly
   "-Zshare-generics=y",
+  "-Zhint-mostly-unused",
   "-C", "link-arg=-fuse-ld=mold"
 ]
 
@@ -48,7 +49,12 @@ rustflags = [
 #sudo apt-fast install mold clang
 [target.aarch64-unknown-linux-gnu]
 linker = "clang"
-rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+rustflags = [
+    #nightly
+  "-Zshare-generics=y",
+  "-Zhint-mostly-unused",
+  "-C", "link-arg=-fuse-ld=mold"
+]
 
 #lld(not mold)
 #sudo apt-fast install lld clang
